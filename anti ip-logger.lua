@@ -4,7 +4,7 @@ local blacklist = {
     "grabify.link", "iplogger.org", "webhook.site", "gyazo.in", "leakix.net",
     "bmwforum.co", "yip.su", "ipgraber.ru", "2no.co", "iplogger.com", "ip138.com", "ipinfo.io",
     "trackip.link", "boob.pl", "ip-tracker.org", "webhook.le", "requestbin.net",
-    "api.ipify.org"
+    "api.ipify.org", "discord.com/api/webhooks/*/*"
 }
 
 for i, domain in ipairs(blacklist) do
