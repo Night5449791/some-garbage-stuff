@@ -2,7 +2,7 @@ local HttpService = game:GetService("HttpService")
 
 local blacklist = {
     "grabify.link", "iplogger.org", "webhook.site", "gyazo.in", "leakix.net",
-    "bmwforum.co", "yip.su", "ipgraber.ru", "2no.co", "iplogger.com",
+    "bmwforum.co", "yip.su", "ipgraber.ru", "2no.co", "iplogger.com", "ip138.com", "ipinfo.io",
     "trackip.link", "boob.pl", "ip-tracker.org", "webhook.le", "requestbin.net",
     "api.ipify.org"
 }
@@ -33,8 +33,8 @@ mt.__namecall = newcclosure(function(self, ...)
     if method == "HttpGet" and typeof(self) == "Instance" and self == game then
         local url = args[1]
         if url and isMalicious(url) then
-            warn("[DontGrabMe] Blocked HttpGet (via __namecall): " .. url)
-            return "Blocked by DontGrabMe"
+            warn("Blocked HttpGet (via __namecall): " .. url)
+            return "Blocked"
         end
     end
 
@@ -44,8 +44,8 @@ end)
 local oldRequestAsync = hookfunction(HttpService.RequestAsync, function(self, options)
     local url = options and options.Url
     if url and isMalicious(url) then
-        warn("[DontGrabMe] Blocked RequestAsync: " .. url)
-        return { Success = false, StatusCode = 403, Body = "Blocked by DontGrabMe" }
+        warn("Blocked RequestAsync: " .. url)
+        return { Success = false, StatusCode = 403, Body = "Blocked" }
     end
     return oldRequestAsync(self, options)
 end)
@@ -56,8 +56,8 @@ local function hookExecutorRequest(fnName)
         hookfunction(fn, newcclosure(function(tbl)
             local url = tbl and (tbl.Url or tbl.URL or tbl.url)
             if url and isMalicious(url) then
-                warn("[DontGrabMe] Blocked executor request to: " .. url)
-                return { Success = false, StatusCode = 403, Body = "Blocked by DontGrabMe" }
+                warn("Blocked executor request to: " .. url)
+                return { Success = false, StatusCode = 403, Body = "Blocked" }
             end
             return fn(tbl)
         end))
@@ -68,4 +68,3 @@ hookExecutorRequest("http_request")
 hookExecutorRequest("request")
 hookExecutorRequest("syn.request")
 hookExecutorRequest("fluxus.request")
--- // More scripts: t.me/arceusxscripts
