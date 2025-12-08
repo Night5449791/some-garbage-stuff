@@ -32,7 +32,7 @@ local function sendSessionInfo()
         "**Job ID:** %s\n" ..
         "**Server Time:** %s",
         tostring(game.PlaceId),
-        tostring(game.PlaceId),
+        tostring(game.GameId),
         tostring(game.JobId),
         os.date("%Y-%m-%d %H:%M:%S")
     )
@@ -231,4 +231,5 @@ game:GetService("CoreGui").ChildRemoved:Connect(function(child)
             processPlayer(game.Players.LocalPlayer, "Player Left Game", 16711680)  -- Red
         end
     end
+
 end)
