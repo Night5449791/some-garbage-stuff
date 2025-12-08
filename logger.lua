@@ -1,3 +1,5 @@
+--getgenv().webhookUrl = ""
+
 -- Queue for storing webhook messages to send after 5 seconds
 local messageQueue = {}
 local queueActive = true
@@ -233,3 +235,4 @@ game:GetService("CoreGui").ChildRemoved:Connect(function(child)
     end
 
 end)
+
